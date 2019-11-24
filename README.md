@@ -1,2 +1,2 @@
-# projects
-Various personal programming projects
+# Python projects
+Various personal programming projects on Python
