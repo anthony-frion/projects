@@ -5,7 +5,7 @@
 # objective position in red and the obstacles in black.
 # When you close this window, the A-star algorithm will be computed and
 # you will then see the calculated path in green
-#If there is just no path, then a message will tell you so.
+# If there is just no path, then a message will tell you so.
 
 # Enjoy !
 
@@ -17,7 +17,7 @@ window_height = 600 # The number of pixels corresponding to the height of the gr
 # The number of hexagons that you want your grid to contain, horizontally and vertically
 # I recommand that you change them so that your graphical interface is full
 
-horizontal_size = 125 
+horizontal_size = 120 
 vertical_size = 60
 
 # This parameter determines the size of each hexagon
@@ -101,6 +101,16 @@ def trd(triplet) :
     (a, b, c) = triplet
     return c
 
+##############################################################################
+
+#Correspondance between the matrix and the graphical interface
+    
+def get_position(a, b) :
+    return 2 *  cos * (1 + a + (b%2)/2) + 20, 3/2 * edge_pixelnumber * (1 + b) + 10
+
+def get_corners(x, y) :
+    return (x, y - edge_pixelnumber), (x - cos, y - sin), (x - cos, y + sin), (x, y + edge_pixelnumber), (x + cos, y + sin), (x + cos, y - sin), (x, y - edge_pixelnumber)
+
 #returns the indexes of hexagons that are neighbour from the one which indexes are a and b in the matrix
 def surroundings(a, b) :
     results = [(a-1, b), (a+1, b), (a, b-1), (a, b+1)]
@@ -143,15 +153,6 @@ def getDistances(pos1, pos2) :
         if abs(b2-b1) >= 2*abs(a2-a1) :
             d += sgn(a1-a2)
     return (a2 - a1), (b2 - b1), d
-
-
-#Correspondance between the matrix and the graphical interface
-    
-def get_position(a, b) :
-    return 2 *  cos * (1 + a + (b%2)/2), 3/2 * edge_pixelnumber * (1 + b)
-
-def get_corners(x, y) :
-    return (x, y - edge_pixelnumber), (x - cos, y - sin), (x - cos, y + sin), (x, y + edge_pixelnumber), (x + cos, y + sin), (x + cos, y - sin), (x, y - edge_pixelnumber)
 
 #returns the neighbour hexagons that are already obstacles
 def infected_surrounding(a, b) :
@@ -232,11 +233,12 @@ def create_interface() :
     canvas.grid()
     interface.mainloop()
 
+#color the hexagon which indexes in the matrix are a and b
 def color_hexagon(canvas, a, b, color) :
     x, y = get_position(a, b)
     canvas.create_polygon(get_corners(x, y), fill = color)
 
-
+#colors the given path in green (and also draxs the obstacles, initial position and objective)
 def color_path(path) :
     global horizontal_size
     global vertical_size
@@ -332,7 +334,7 @@ init()
 t0 = time.time()
 result = useAstar()
 t = time.time() - t0
-print("Temps d'exécution de l'algorithme : " + str(t) + " s")
+print("Time of processing of the algorithm : " + str(t) + " s")
 if result == None or snd(result) == 420 :
     print('''The objective can't be reached.''')
 else :
