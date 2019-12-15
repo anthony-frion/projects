@@ -60,7 +60,7 @@ draw = True
 
 ###########################################################################################
 
-# From now, you don't have to just anything, but I strongly recommand that you take some look,
+# From now, you don't have to change anything, but I strongly recommand that you take some look,
 # and maybe try to change some bits of code to begin with :D
 
 # Imported modules
