@@ -1,6 +1,6 @@
 # Hello, and thank you for paying attention to my work !
 
-# To use the code as it is, you just have to executte it, then a 
+# To use the code as it is, you just have to execute it, then a 
 # graphical interface will show you the initial position in blue, the
 # objective position in red and the obstacles in black.
 # When you close this window, the A-star algorithm will be computed and
